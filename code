@@ -1,0 +1,62 @@
+//sprites
+var giantpizza = createSprite(190, 200);
+giantpizza.setAnimation("pizza_pepperoni_1");
+giantpizza.scale = 0.35;
+giantpizza.visible = false;
+var menubutton = createSprite(365, 35);
+menubutton.setAnimation("menubutton.png_1");
+menubutton.scale = 0.10;
+//number variables
+var start = 0;
+var upgradescreenvar = 0;
+var pause = 0;
+var coins = 0;
+var coinsperclick = 1;
+var amongus = 0;
+function draw() {
+  if (mouseWentUp("leftButton")) {
+    amongus = 500;
+  }
+  if (amongus > 1) {
+    fill("red");
+  }
+  background("skyblue");
+  if (start < 1) {
+    startscreen();
+  }
+  if (start >= 1 && (upgradescreenvar == 0 && pause == 0)) {
+    gamemainscreen();
+    clicking();
+  }
+}
+//Start screen
+function startscreen() {
+  background("skyblue");
+  textSize(30);
+  fill("black");
+  text("Pizza Capitalism", 85, 70);
+  textSize(18);
+  text("Press Space to Start", 115, 105);
+  if (keyDown("space")) {
+    start = 2;
+  }
+}
+function gamemainscreen() {
+  background("skyblue");
+  giantpizza.visible = true;
+  fill("black");
+  textSize(20);
+  text("Coins=", 20, 35);
+  text(coins, 90, 35);
+}
+function clicking() {
+  if ((mouseIsOver(giantpizza) && mouseWentDown("leftButton")) && (upgradescreenvar == 0 && (pause == 0 && start >= 1))) {
+    giantpizza.scale = 0.25;
+    coins = coins + coinsperclick;
+    textSize(20);
+    text("+1", 248, 132);
+  } else {
+    giantpizza.scale = 0.35;
+  }
+  drawSprites();
+}
