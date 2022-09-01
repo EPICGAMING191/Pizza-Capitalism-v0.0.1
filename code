@@ -40,6 +40,7 @@ function startscreen() {
   if (keyDown("space")) {
     start = 2;
   }
+  //hello
 }
 function gamemainscreen() {
   background("skyblue");
